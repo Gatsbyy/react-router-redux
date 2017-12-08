@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import Loading from "./components/Loading";
+import Repo from "./components/Repo";
 import reducer from "./reducer";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
@@ -23,10 +24,10 @@ const AsyncRepos = Loadable({
   loading: Loading,
 });
 
-const AsyncRepo = Loadable({
-  loader: () => import('./components/Repo'),
-  loading: Loading,
-});
+// const AsyncRepo = Loadable({
+//   loader: () => import('./components/Repo'),
+//   loading: Loading,
+// });
 
 const initState = {};
 const enhancer = applyMiddleware(thunk);
@@ -39,7 +40,7 @@ render((
         <Route exact path="/" component={AsyncHome}/>
         <Route path="/about" component={AsyncAbout}/>
         <Route exact path="/repos" component={AsyncRepos}/>
-        <Route exact path="/repos/:first" component={AsyncRepo}/>
+        <Route exact path="/repos/:first" component={Repo}/>
       </Switch>
     </Router>
   </Provider>
